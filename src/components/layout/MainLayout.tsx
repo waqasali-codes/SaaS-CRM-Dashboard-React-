@@ -7,9 +7,8 @@ const MainLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="flex min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
 
-      {/* MOBILE OVERLAY */}
       {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-black/40 z-40 lg:hidden"
@@ -17,12 +16,11 @@ const MainLayout = () => {
         />
       )}
 
-      {/* SIDEBAR */}
       <div
         className={`
-          fixed z-50 inset-y-0 left-0 w-64
-          bg-white dark:bg-gray-800
-          border-r dark:border-gray-700
+          fixed inset-y-0 left-0 z-50 w-64
+          bg-white dark:bg-gray-900
+          border-r border-gray-200 dark:border-gray-700
           transform transition-transform duration-300
           ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
           lg:translate-x-0 lg:static lg:block
@@ -31,18 +29,13 @@ const MainLayout = () => {
         <Sidebar closeSidebar={() => setIsSidebarOpen(false)} />
       </div>
 
-      {/* MAIN AREA */}
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 min-h-screen">
 
-        <Navbar
-          toggleSidebar={() => setIsSidebarOpen(prev => !prev)}
-          isSidebarOpen={isSidebarOpen}
-        />
+        <Navbar toggleSidebar={() => setIsSidebarOpen((prev) => !prev)} />
 
-        {/* CONTENT */}
-        <div className="p-6 flex-1 overflow-auto bg-gray-50 dark:bg-gray-900">
+        <main className="flex-1 p-6 overflow-x-hidden bg-gray-50 dark:bg-gray-900">
           <Outlet />
-        </div>
+        </main>
 
       </div>
     </div>

@@ -1,7 +1,12 @@
+import type { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 
-const ProtectedRoute = ({ children }) => {
+type Props = {
+  children: ReactNode;
+};
+
+const ProtectedRoute = ({ children }: Props) => {
   const { user, loading } = useAuth();
 
   if (loading) {
@@ -16,7 +21,7 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/login" replace />;
   }
 
-  return children;
+  return <>{children}</>;
 };
 
 export default ProtectedRoute;
