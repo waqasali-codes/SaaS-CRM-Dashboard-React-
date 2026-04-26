@@ -25,26 +25,22 @@ const Sidebar = ({ closeSidebar }: Props) => {
       {/* NAV */}
       <nav className="flex flex-col gap-1 p-3">
         <NavLink
-          to="/dashboard"
-          onClick={closeSidebar}
-          className={({ isActive }: { isActive: boolean }) =>
-            `relative flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium transition ${
-              isActive
-                ? "bg-blue-600 text-white shadow"
-                : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-            }`
-          }
-        >
-          {({ isActive }) => (
-            <>
-              {isActive && (
-                <span className="absolute left-0 top-2 bottom-2 w-1 bg-white rounded-full" />
-              )}
-              <LayoutDashboard size={18} />
-              Dashboard
-            </>
-          )}
-        </NavLink>
+  to="/dashboard"
+  onClick={closeSidebar}
+  className={({ isActive }) =>
+    `relative flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium transition
+    ${
+      isActive
+        ? "bg-blue-600 text-white shadow"
+        : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+    }`
+  }
+>
+  <LayoutDashboard size={18} />
+  Dashboard
+
+  <span className="absolute left-0 top-2 bottom-2 w-1 bg-white rounded-full hidden" />
+</NavLink>
 
         <NavLink
           to="/leads"
