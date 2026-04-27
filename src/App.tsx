@@ -8,6 +8,7 @@ import LeadsList from "./pages/leads/LeadsList";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 import MainLayout from "./components/layout/MainLayout";
+import UserManagement from "./pages/management/UserManagement";
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
           {/* PAGES */}
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="leads" element={<LeadsList />} />
+          <Route path="users" element={<UserManagement />} />
 
         </Route>
 

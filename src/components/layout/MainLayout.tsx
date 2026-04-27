@@ -1,13 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import { Outlet } from "react-router-dom";
+import WelcomeModal from "../common/WelcomeModal";
 
 const MainLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(false);
+
+  useEffect(() => {
+    const alreadySeen = localStorage.getItem("crm_welcome_seen");
+    if (!alreadySeen) {
+      setShowWelcome(true);
+    }
+  }, []);
+
+  const closeWelcome = () => {
+    localStorage.setItem("crm_welcome_seen", "true");
+    setShowWelcome(false);
+  };
 
   return (
     <div className="flex h-screen overflow-hidden bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
+      {/* Welcome Modal */}
+      {showWelcome && <WelcomeModal onClose={closeWelcome} />}
 
       {/* OVERLAY — mobile only */}
       {isSidebarOpen && (
@@ -39,7 +55,6 @@ const MainLayout = () => {
           <Outlet />
         </main>
       </div>
-
     </div>
   );
 };

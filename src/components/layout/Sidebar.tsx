@@ -1,17 +1,18 @@
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard, Users, Cloud } from "lucide-react";
+import { LayoutDashboard, Users, Cloud, UserCog } from "lucide-react";
+import { useAuth } from "../../context/authContext";
 
 type Props = {
   closeSidebar?: () => void;
 };
 
 const Sidebar = ({ closeSidebar }: Props) => {
+  const { user } = useAuth();
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     `relative flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium transition
-    ${
-      isActive
-        ? "bg-blue-600 text-white shadow"
-        : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+    ${isActive
+      ? "bg-blue-600 text-white shadow"
+      : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
     }`;
 
   return (
@@ -41,6 +42,13 @@ const Sidebar = ({ closeSidebar }: Props) => {
           <Users size={18} />
           Leads
         </NavLink>
+
+        {user?.role === "admin" && (
+          <NavLink to="/users" onClick={closeSidebar} className={linkClass}>
+            <UserCog size={18} />
+            Users
+          </NavLink>
+        )}
 
       </nav>
 
