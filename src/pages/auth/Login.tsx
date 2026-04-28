@@ -21,23 +21,28 @@ const Login = () => {
   }, [user, navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setLoading(true);
-  setError("");
+    e.preventDefault();
+    setLoading(true);
+    setError("");
 
-  const { error } = await signIn(email, password);
+    const { error } = await signIn(email, password);
 
-  if (error) {
-    toast.error(error.message);
-    setError(error.message);
-    setLoading(false);
-    return;
-  }
+    if (error) {
+      toast.error(error.message);
+      setError(error.message);
+      setLoading(false);
+      return;
+    }
 
-  toast.success("Login successful");
-  navigate("/dashboard");
-};
+    toast.success("Login successful");
+    navigate("/dashboard");
+  };
 
+  const fillSuperAdminDemo = () => {
+    setEmail("waqasalimughal760@gmail.com");
+    setPassword("12345678");
+    setError("");
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
       <div className="w-full max-w-md bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-8">
@@ -52,10 +57,8 @@ const Login = () => {
           </p>
         </div>
 
-        {/* FORM */}
         <form onSubmit={handleLogin} className="space-y-4">
 
-          {/* EMAIL */}
           <div>
             <label className="text-sm text-gray-600 dark:text-gray-300">
               Email
@@ -73,7 +76,6 @@ const Login = () => {
             </div>
           </div>
 
-          {/* PASSWORD */}
           <div>
             <label className="text-sm text-gray-600 dark:text-gray-300">
               Password
@@ -91,12 +93,10 @@ const Login = () => {
             </div>
           </div>
 
-          {/* ERROR */}
           {error && (
             <p className="text-red-500 text-sm">{error}</p>
           )}
 
-          {/* BUTTON */}
           <button
             type="submit"
             disabled={loading}
@@ -108,6 +108,27 @@ const Login = () => {
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
+        {/* DEMO ACCESS - Super Admin  */}
+        <div className="mt-5 rounded-xl border border-blue-100 dark:border-blue-900/40 bg-blue-50/70 dark:bg-blue-950/20 p-4">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <p className="text-sm font-semibold text-gray-800 dark:text-white">
+                Super Admin Demo
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                Instantly test the full CRM with complete platform access.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={fillSuperAdminDemo}
+              className="shrink-0 rounded-lg border border-blue-200 dark:border-blue-800 px-3 py-1.5 text-xs font-medium text-blue-700 dark:text-blue-300 hover:bg-white dark:hover:bg-blue-900/30 transition"
+            >
+              Fill Demo
+            </button>
+          </div>
+        </div>
 
         {/* FOOTER */}
         <p className="text-center text-sm text-gray-500 dark:text-gray-300 mt-6">

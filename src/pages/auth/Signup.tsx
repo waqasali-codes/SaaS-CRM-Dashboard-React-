@@ -45,10 +45,8 @@ const Signup = () => {
           </p>
         </div>
 
-        {/* FORM */}
         <form onSubmit={handleSignup} className="space-y-4">
 
-          {/* EMAIL */}
           <div>
             <label className="text-sm text-gray-600 dark:text-gray-300">
               Email
@@ -66,7 +64,6 @@ const Signup = () => {
             </div>
           </div>
 
-          {/* PASSWORD */}
           <div>
             <label className="text-sm text-gray-600 dark:text-gray-300">
               Password
@@ -84,12 +81,10 @@ const Signup = () => {
             </div>
           </div>
 
-          {/* ERROR */}
           {error && (
             <p className="text-red-500 text-sm">{error}</p>
           )}
 
-          {/* BUTTON */}
           <button
             type="submit"
             disabled={loading}
@@ -102,7 +97,6 @@ const Signup = () => {
           </button>
         </form>
 
-        {/* FOOTER */}
         <p className="text-center text-sm text-gray-500 dark:text-gray-300 mt-6">
           Already have an account?{" "}
           <Link

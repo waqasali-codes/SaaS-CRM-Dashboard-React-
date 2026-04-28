@@ -133,11 +133,10 @@ const UserManagement = () => {
 
                   <td className="px-4 py-3">
                     <span
-                      className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold ${
-                        item.role === "admin"
+                      className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold ${item.role === "admin"
                           ? "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300"
                           : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
-                      }`}
+                        }`}
                     >
                       {item.role === "admin" ? (
                         <Shield size={14} />
@@ -148,35 +147,34 @@ const UserManagement = () => {
                     </span>
                   </td>
 
-                 <td className="px-4 py-3 text-right">
-  {item.id === currentUser?.id ? (
-    <span className="inline-flex items-center px-4 py-2 rounded-xl text-sm font-medium bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400 cursor-not-allowed">
-      Your Account
-    </span>
-  ) : (
-    <button
-      onClick={() =>
-        updateRole(item.id, item.role === "admin" ? "user" : "admin")
-      }
-      disabled={updatingId === item.id}
-      className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition ${
-        item.role === "admin"
-          ? "bg-gray-200 hover:bg-gray-300 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white"
-          : "bg-blue-600 hover:bg-blue-700 text-white"
-      } disabled:opacity-60 disabled:cursor-not-allowed`}
-    >
-      {updatingId === item.id ? (
-        <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-      ) : item.role === "admin" ? (
-        <ArrowDownRight size={15} />
-      ) : (
-        <ArrowUpRight size={15} />
-      )}
+                  <td className="px-4 py-3 text-right">
+                    {item.id === currentUser?.id ? (
+                      <span className="inline-flex items-center px-4 py-2 rounded-xl text-sm font-medium bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400 cursor-not-allowed">
+                        Your Account
+                      </span>
+                    ) : (
+                      <button
+                        onClick={() =>
+                          updateRole(item.id, item.role === "admin" ? "user" : "admin")
+                        }
+                        disabled={updatingId === item.id}
+                        className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition ${item.role === "admin"
+                            ? "bg-gray-200 hover:bg-gray-300 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white"
+                            : "bg-blue-600 hover:bg-blue-700 text-white"
+                          } disabled:opacity-60 disabled:cursor-not-allowed`}
+                      >
+                        {updatingId === item.id ? (
+                          <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                        ) : item.role === "admin" ? (
+                          <ArrowDownRight size={15} />
+                        ) : (
+                          <ArrowUpRight size={15} />
+                        )}
 
-      Make {item.role === "admin" ? "User" : "Admin"}
-    </button>
-  )}
-</td>
+                        Make {item.role === "admin" ? "User" : "Admin"}
+                      </button>
+                    )}
+                  </td>
                 </tr>
               ))
             )}
@@ -202,7 +200,7 @@ const UserManagement = () => {
         </div>
       </div>
 
-      {/* Super Admin Card */}
+      {/* Super Admin */}
       {isSuperAdmin && currentProfile && (
         <div className="rounded-2xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20 p-5">
           <div className="flex items-center gap-3">

@@ -19,9 +19,9 @@ type Lead = {
 type StatusKey = "All" | "New" | "Contacted" | "Converted";
 
 const STATUS_CONFIG = {
-  New:       { bg: "bg-blue-100 dark:bg-blue-900/40",   text: "text-blue-700 dark:text-blue-300",   dot: "bg-blue-500"   },
-  Contacted: { bg: "bg-amber-100 dark:bg-amber-900/40", text: "text-amber-700 dark:text-amber-300", dot: "bg-amber-500"  },
-  Converted: { bg: "bg-green-100 dark:bg-green-900/40", text: "text-green-700 dark:text-green-300", dot: "bg-green-500"  },
+  New: { bg: "bg-blue-100 dark:bg-blue-900/40", text: "text-blue-700 dark:text-blue-300", dot: "bg-blue-500" },
+  Contacted: { bg: "bg-amber-100 dark:bg-amber-900/40", text: "text-amber-700 dark:text-amber-300", dot: "bg-amber-500" },
+  Converted: { bg: "bg-green-100 dark:bg-green-900/40", text: "text-green-700 dark:text-green-300", dot: "bg-green-500" },
 };
 
 const STATUSES: StatusKey[] = ["All", "New", "Contacted", "Converted"];
@@ -29,19 +29,19 @@ const defaultForm = { name: "", email: "", phone: "", status: "New" };
 
 const LeadsList = () => {
   const { user } = useAuth();
-  const [deleteId, setDeleteId]         = useState<string | null>(null);
-  const [leads, setLeads]               = useState<Lead[]>([]);
-  const [loading, setLoading]           = useState(true);
-  const [saving, setSaving]             = useState(false);
-  const [showForm, setShowForm]         = useState(false);
-  const [editingLead, setEditingLead]   = useState<Lead | null>(null);
-  const [search, setSearch]             = useState("");
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [leads, setLeads] = useState<Lead[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [editingLead, setEditingLead] = useState<Lead | null>(null);
+  const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<StatusKey>("All");
-  const [formData, setFormData]         = useState(defaultForm);
+  const [formData, setFormData] = useState(defaultForm);
 
   const counts: Record<StatusKey, number> = {
-    All:       leads.length,
-    New:       leads.filter(l => l.status === "New").length,
+    All: leads.length,
+    New: leads.filter(l => l.status === "New").length,
     Contacted: leads.filter(l => l.status === "Contacted").length,
     Converted: leads.filter(l => l.status === "Converted").length,
   };
@@ -107,8 +107,6 @@ const LeadsList = () => {
     const matchesStatus = statusFilter === "All" || lead.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
-
-  /* ── LOADING ── */
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center h-64 gap-3">
@@ -117,21 +115,8 @@ const LeadsList = () => {
       </div>
     );
   }
-
-  /* ── MAIN ──
-   *
-   * ROOT LAYOUT REQUIREMENT (in your DashboardLayout / parent):
-   *   <main className="flex-1 min-w-0 overflow-y-auto bg-white dark:bg-gray-900">
-   *     <Outlet />
-   *   </main>
-   *
-   * Why: scrolling must happen on <main>, NOT inside LeadsList.
-   * This makes the bg colour fill the whole viewport when scrolling,
-   * and removes the phantom vertical scroll space.
-   */
   return (
     <>
-      {/* ── PAGE CONTENT ── */}
       <div className="w-full min-w-0 p-4 sm:p-6 text-gray-900 dark:text-white">
 
         {/* HEADER */}
@@ -163,7 +148,6 @@ const LeadsList = () => {
           />
         </div>
 
-        {/* STATUS TABS — horizontally scrollable, hidden scrollbar */}
         <div className="flex gap-1 mb-5 border-b border-gray-200 dark:border-gray-700 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {STATUSES.map(status => (
             <button
@@ -190,12 +174,6 @@ const LeadsList = () => {
           ))}
         </div>
 
-        {/*
-          TABLE WRAPPER
-          - overflow-hidden on outer for border-radius clipping
-          - overflow-x-auto only on inner div → horizontal scroll on mobile only
-          - NO overflow-y anywhere → page handles vertical scroll, no phantom space
-        */}
         <div className="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
           <div className="overflow-x-auto bg-white dark:bg-gray-800/40">
             <table className="w-full min-w-[560px] border-collapse text-sm">
@@ -263,7 +241,6 @@ const LeadsList = () => {
             </table>
           </div>
 
-          {/* EMPTY STATE — sits inside the border box */}
           {filteredLeads.length === 0 && (
             <div className="flex flex-col items-center justify-center py-16 px-4 text-center bg-white dark:bg-gray-800/40">
               <div className="w-14 h-14 rounded-2xl bg-gray-100 dark:bg-gray-700/60 flex items-center justify-center mb-4">
@@ -279,7 +256,6 @@ const LeadsList = () => {
           )}
         </div>
 
-        {/* RESULT COUNT */}
         {filteredLeads.length > 0 && (
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-3 text-right">
             Showing {filteredLeads.length} of {leads.length} lead{leads.length !== 1 ? "s" : ""}
@@ -288,8 +264,6 @@ const LeadsList = () => {
 
       </div>
 
-      {/* ── ADD / EDIT MODAL ──
-          fixed → never contributes to scroll height at all             */}
       {showForm && (
         <div
           className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm p-0 sm:p-4"
@@ -311,9 +285,9 @@ const LeadsList = () => {
 
             <div className="px-5 py-4 space-y-3 bg-white dark:bg-gray-900">
               {[
-                { key: "name",  label: "Full Name",     type: "text",  placeholder: "e.g. Ali Hassan",      required: true  },
-                { key: "email", label: "Email Address", type: "email", placeholder: "e.g. ali@example.com", required: true  },
-                { key: "phone", label: "Phone Number",  type: "tel",   placeholder: "e.g. 0300-1234567",    required: false },
+                { key: "name", label: "Full Name", type: "text", placeholder: "e.g. Ali Hassan", required: true },
+                { key: "email", label: "Email Address", type: "email", placeholder: "e.g. ali@example.com", required: true },
+                { key: "phone", label: "Phone Number", type: "tel", placeholder: "e.g. 0300-1234567", required: false },
               ].map(({ key, label, type, placeholder, required }) => (
                 <div key={key}>
                   <label className="block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1.5 uppercase tracking-wide">
@@ -372,7 +346,6 @@ const LeadsList = () => {
         </div>
       )}
 
-      {/* ── DELETE MODAL ── */}
       {deleteId && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"

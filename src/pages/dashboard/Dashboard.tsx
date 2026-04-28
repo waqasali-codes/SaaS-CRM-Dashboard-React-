@@ -81,7 +81,6 @@ const Dashboard = () => {
         Dashboard
       </h1>
 
-      {/* KPI CARDS */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card title="Total Leads" value={stats.total} />
         <Card title="New Leads" value={stats.new} />
@@ -92,7 +91,7 @@ const Dashboard = () => {
       {/* CHART */}
       <LeadsChart data={chartData} />
 
-      
+
     </div>
   );
 };

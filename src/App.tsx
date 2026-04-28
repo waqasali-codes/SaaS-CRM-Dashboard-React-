@@ -29,7 +29,7 @@ const App = () => {
           }
         >
 
-          {/* DEFAULT ROUTE → DASHBOARD */}
+          {/* DEFAULT ROUTE DASHBOARD */}
           <Route index element={<Navigate to="dashboard" replace />} />
 
           {/* PAGES */}

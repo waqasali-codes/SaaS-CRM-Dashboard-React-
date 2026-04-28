@@ -12,7 +12,6 @@ const WelcomeModal = ({ onClose }: Props) => {
     >
       <div className="w-full max-w-2xl sm:rounded-3xl rounded-t-3xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
 
-        {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200 dark:border-gray-700 shrink-0">
           <div>
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">
@@ -31,7 +30,6 @@ const WelcomeModal = ({ onClose }: Props) => {
           </button>
         </div>
 
-        {/* Body (scroll fix applied here) */}
         <div className="p-6 space-y-5 overflow-y-auto flex-1">
 
           <div className="rounded-2xl bg-blue-50 dark:bg-blue-900/20 p-4 border border-blue-100 dark:border-blue-800">
@@ -98,7 +96,6 @@ const WelcomeModal = ({ onClose }: Props) => {
 
         </div>
 
-        {/* Footer */}
         <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-end shrink-0">
           <button
             onClick={onClose}

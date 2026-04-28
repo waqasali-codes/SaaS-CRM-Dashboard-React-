@@ -22,10 +22,7 @@ const MainLayout = () => {
 
   return (
     <div className="flex h-screen overflow-hidden bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
-      {/* Welcome Modal */}
       {showWelcome && <WelcomeModal onClose={closeWelcome} />}
-
-      {/* OVERLAY — mobile only */}
       {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-black/40 z-40 lg:hidden"
@@ -33,7 +30,6 @@ const MainLayout = () => {
         />
       )}
 
-      {/* SIDEBAR */}
       <div
         className={`
           fixed inset-y-0 left-0 z-50 w-64 flex-shrink-0
@@ -47,7 +43,6 @@ const MainLayout = () => {
         <Sidebar closeSidebar={() => setIsSidebarOpen(false)} />
       </div>
 
-      {/* MAIN COLUMN */}
       <div className="flex flex-col flex-1 min-w-0 h-full overflow-hidden">
         <Navbar toggleSidebar={() => setIsSidebarOpen((prev) => !prev)} />
 
